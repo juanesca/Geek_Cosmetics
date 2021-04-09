@@ -1,6 +1,6 @@
 # Geek Cosmetics
 
-An application, built with PERN stack(Postgresql, express, react, nodejs), to buy cosmetics.
+An application, built with PERN stack(Postgresql, express, react, nodejs), to buy cosmetics and see the info about the orders.
 
 ## Set up
 
