@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors());
 
-app.set("port", procces.env.PORT);
+app.set("port", process.env.PORT || 4000);
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));

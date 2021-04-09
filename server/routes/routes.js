@@ -16,6 +16,21 @@ router.get('/order',async (req, res) => {
     }
 });
 
+router.get('/order/:id',async (req, res) => {
+    try {
+        const { id } = req.params;
+        let connection = await db.connect();
+        const Order = await connection.query("SELECT * FROM orders WHERE _id = $1",[id]);
+        connection.release();
+
+        const body = Order.rows;
+        res.status(200).json(body);
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json("Server error")
+    }
+});
+
 router.post('/order/add', async (req, res) => {
     try {
         const {username, subtotal, iva, total, products} = req.body;
@@ -26,8 +41,8 @@ router.post('/order/add', async (req, res) => {
 
         for (let i = 0; i < products.length ; i++) {
             try {
-                let {product_id,amount,subtotal} = products[i];
-                await connection.query("INSERT INTO op (order_id,product_id,amount,subtotal) VALUES ($1,$2,$3,$4) RETURNING _id",[order_id,product_id,amount,subtotal]);
+                let {product_id,amount,subtotal,name} = products[i];
+                await connection.query("INSERT INTO op (order_id,product_id,amount,subtotal,name) VALUES ($1,$2,$3,$4,$5) RETURNING _id",[order_id,product_id,amount,subtotal,name]);
             } catch (err) {
                 console.log(err.message);
                 res.status(500).json("Server error");
