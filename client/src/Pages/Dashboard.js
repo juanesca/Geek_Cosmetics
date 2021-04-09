@@ -6,18 +6,13 @@ import { axios } from "../Functions/axios";
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
   const [orderSpecific, setOrderSpecific] = useState([]);
-  const [products, setProducts] = useState([]);
   const [orderProducts, setOrderProducts] = useState([]);
   const [modalInfo, setModalInfo] = useState(false);
   const [modalInfoID, setModalInfoID] = useState(0);
-  const [modalInsert, setModalInsert] = useState(false);
+  
 
   const mi = () => {
     setModalInfo(!modalInfo);
-  };
-
-  const min = () => {
-    setModalInsert(!modalInsert);
   };
 
   const getOrders = async () => {
@@ -46,17 +41,6 @@ const Dashboard = () => {
     try {
       await axios.get(`/op/${id}`).then((res) => {
         setOrderProducts(res.data);
-      });
-    } catch (err) {
-      toast.error("No se pudo conectar con la base de datos");
-      console.error(err.message);
-    }
-  };
-
-  const getProducts = async () => {
-    try {
-      await axios.get(`/products`).then((res) => {
-        setProducts(res.data);
       });
     } catch (err) {
       toast.error("No se pudo conectar con la base de datos");

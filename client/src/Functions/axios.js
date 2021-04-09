@@ -3,5 +3,5 @@ import ax from 'axios';
 require('dotenv').config();
 
 export const axios = ax.create({
-  baseURL: process.env.SERVER,
+  baseURL: process.env.SERVER || 'http://geek-cosmetics.herokuapp.com/',
 });
